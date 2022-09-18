@@ -1,0 +1,170 @@
+body {
+    font-family: Roboto, sans-serif;
+    margin: 0;
+    /* padding: 0; */
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+li > a {
+    color: #f9faf8;
+    text-decoration: none;
+}
+
+.display {
+    height: 150px;
+    width: 150px;
+    border: 3px solid blue;
+    border-radius: 25px;
+}
+
+.footer {
+    color: #f9faf8;
+    font-size: 16px;
+    padding: 16px 0;
+}
+
+.footer > .section-container {
+    display: flex;
+    justify-content: center;
+}
+
+.header,
+.footer {
+    background-color: #1f2937;
+}
+
+.header-links {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-links > ul {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+
+.header-sub {
+    display: flex;
+    padding: 64px 0;
+}
+
+.hero-text {
+    font-size: 48px;
+    font-weight: 900;
+    color: #f9faf8;
+}
+
+.logo {
+    font-size: 24px;
+    color: #f9faf8;
+}
+
+.hero-subtext {
+    font-size: 18px;
+    color: #e5e7eb;
+}
+
+.hero-signup {
+    color: #f9faf8;
+    background-color: blue;
+    border: 0;
+    border-radius: 5px;
+    padding: 8px;
+    height: 40px;
+    width: 100px;
+
+}
+
+.quote {
+    font-size: 36px;
+    font-style: italic;
+    color: #1f2937;
+    margin-bottom: 0;
+}
+
+.section-container{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.section1 > .section-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.item {
+    width: 170px;
+}
+
+.section-container > .items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.section2 {
+    background-color: #e5e7eb;
+}
+
+.section2 > .section-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.signature {
+    font-weight: 700;
+    justify-self: flex-end;
+    align-self: flex-end;
+}
+
+.section3 {
+    padding: 24px;
+}
+
+.section3 > .section-container {
+    background-color: #3882f6;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.container {
+    padding: 16px;
+}
+
+.container > p {
+    margin: 0;
+    color: #fff;
+}
+
+.cta {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.cta-sub {
+    font-size: 12px;
+}
+
+.signup-invert {
+    background-color: #3882f6;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    font-weight: 600;
+    height: 40px;
+    width: 100px;
+    align-self: center;
+}
