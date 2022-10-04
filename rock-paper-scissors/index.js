@@ -1,5 +1,12 @@
 // Rock, Paper, Scissor
 
+const result = document.getElementById("result");
+const player = document.getElementById("playerScore");
+const computer = document.getElementById("computerScore");
+let playerScore = 0;
+let computerScore = 0;
+let gameOver = false;
+
 let getComputerChoice = () => {
     let choiceNum_ = Math.floor(Math.random() * 3) + 1;
 
@@ -16,42 +23,77 @@ let getComputerChoice = () => {
     }
 };
 
-let playRound = (playerSelection, computerSelection) => {
-    switch(playerSelection.toLowerCase()) {
+const tieGame = () => { result.textContent = "Tie Game."; }
+
+const roundResult = (playerChoice, computerChoice, playerWin) => {
+    if (playerWin) { 
+        playerScore++;
+        result.textContent = `${playerChoice} beats ${computerChoice}.  You Win.`;
+    }
+    else {
+        computerScore++;
+        result.textContent = `${computerChoice} beats ${playerChoice}.  You Lose.`;
+    }
+    updateScores();
+
+    if (playerScore === 5) {
+        endGame("Player");
+    }
+    else if (computerScore === 5) {
+        endGame("Computer");
+    }
+};
+
+const updateScores = () => {
+    player.textContent = `Player Score: ${playerScore}`;
+    computer.textContent = `Computer Score: ${computerScore}`;
+};
+
+const endGame = (winner) => {
+    result.textContent = `${winner} wins!`;
+    gameOver = true;
+};
+
+let playRound = (e) => {
+    if (gameOver) return;
+    const playerSelection = e.target.id;
+    const computerSelection = getComputerChoice();
+
+    switch(playerSelection) {
         case "rock":
             if (computerSelection == "rock") {
-                console.log("Tie game.");
+                tieGame();
             }
             else if (computerSelection == "paper") {
-                console.log("Rock loses to paper.  You lose.");
+                roundResult(playerSelection, computerSelection, false);
             }
             else {
                 // Scissor
-                console.log("Rock beats scissor.  You win.");
+                roundResult(playerSelection, computerSelection, true);
             }
             break;
         case "paper":
             if (computerSelection == "rock") {
-                console.log("Paper beats rock.  You win.");
+                roundResult(playerSelection, computerSelection, true);
             }
             else if (computerSelection == "paper") {
-                console.log("Tie game.");
+                tieGame();
             }
             else {
                 // Scissor
-                console.log("Paper loses to scissor.  You lose.");
+                roundResult(playerSelection, computerSelection, false);
             }
             break;
         case "scissor":
             if (computerSelection == "rock") {
-                console.log("Scissor loses to rock.  You lose.");
+                roundResult(playerSelection, computerSelection, false);
             }
             else if (computerSelection == "paper") {
-                console.log("Scissor beats paper.  You Win.");
+                roundResult(playerSelection, computerSelection, true);
             }
             else {
                 // Scissor
-                console.log("Tie game.");
+                tieGame();
             }
             break;
         default:
@@ -60,11 +102,5 @@ let playRound = (playerSelection, computerSelection) => {
     }
 };
 
-let game = () => {
-    for (let i = 0; i < 5; i++) {
-        let playerChoice = prompt("Enter a choice (rock, paper, scissor): ");
-        playRound(playerChoice, getComputerChoice());
-    }
-};
-
-game();
+const options = document.querySelectorAll(".option");
+options.forEach(option => option.addEventListener('click', playRound));
