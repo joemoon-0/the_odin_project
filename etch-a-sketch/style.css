@@ -1,0 +1,46 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: red;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-row {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.grid {
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   width: 100%;
+}
+
+#sketch {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 60%;
+    height: 40em;
+}
+
+#wrapper {
+    background-color: #234;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
