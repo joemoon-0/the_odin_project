@@ -1,106 +1,98 @@
-// Rock, Paper, Scissor
+// Tic Tac Toe
+//
+// Board Legend: 0 = Nothing, 1 = X, 2 = O
 
-const result = document.getElementById("result");
-const player = document.getElementById("playerScore");
-const computer = document.getElementById("computerScore");
-let playerScore = 0;
-let computerScore = 0;
-let gameOver = false;
+const board = (() => {
+    // Create Game Board
+    const boardRows      = 3;
+    const boardColumns   = 3;
+    let board = new Array(boardRows).fill(0).map(() => new Array(boardColumns).fill(0));
 
-let getComputerChoice = () => {
-    let choiceNum_ = Math.floor(Math.random() * 3) + 1;
+    const addX = (row, col) => { board[row][col] = "1"; checkForWinner(); };
+    const addO = (row, col) => { board[row][col] = "2"; checkForWinner(); };
 
-    switch(choiceNum_) {
-        case 1:
-            return "rock";
-            break;
-        case 2:
-            return "paper";
-            break;
-        case 3:
-            return "scissor";
-            break;
-    }
-};
-
-const tieGame = () => { result.textContent = "Tie Game."; }
-
-const roundResult = (playerChoice, computerChoice, playerWin) => {
-    if (playerWin) { 
-        playerScore++;
-        result.textContent = `${playerChoice} beats ${computerChoice}.  You Win.`;
-    }
-    else {
-        computerScore++;
-        result.textContent = `${computerChoice} beats ${playerChoice}.  You Lose.`;
-    }
-    updateScores();
-
-    if (playerScore === 5) {
-        endGame("Player");
-    }
-    else if (computerScore === 5) {
-        endGame("Computer");
-    }
-};
-
-const updateScores = () => {
-    player.textContent = `Player Score: ${playerScore}`;
-    computer.textContent = `Computer Score: ${computerScore}`;
-};
-
-const endGame = (winner) => {
-    result.textContent = `${winner} wins!`;
-    gameOver = true;
-};
-
-let playRound = (e) => {
-    if (gameOver) return;
-    const playerSelection = e.target.id;
-    const computerSelection = getComputerChoice();
-
-    switch(playerSelection) {
-        case "rock":
-            if (computerSelection == "rock") {
-                tieGame();
+    const checkForWinner = () => {
+        let winner = false;
+        
+        // Check rows
+        for (row in board) {
+            let marked = board[row][0];     // either X or O
+            if (marked) {
+                for (col in board[row]) {
+                    if (board[row][col] == marked) {
+                        winner = true;
+                    }                    
+                    else {
+                        winner = false;
+                        break;
+                    }
+                }
             }
-            else if (computerSelection == "paper") {
-                roundResult(playerSelection, computerSelection, false);
-            }
-            else {
-                // Scissor
-                roundResult(playerSelection, computerSelection, true);
-            }
-            break;
-        case "paper":
-            if (computerSelection == "rock") {
-                roundResult(playerSelection, computerSelection, true);
-            }
-            else if (computerSelection == "paper") {
-                tieGame();
-            }
-            else {
-                // Scissor
-                roundResult(playerSelection, computerSelection, false);
-            }
-            break;
-        case "scissor":
-            if (computerSelection == "rock") {
-                roundResult(playerSelection, computerSelection, false);
-            }
-            else if (computerSelection == "paper") {
-                roundResult(playerSelection, computerSelection, true);
-            }
-            else {
-                // Scissor
-                tieGame();
-            }
-            break;
-        default:
-            console.error("Invalid player selection.");
-            break;
-    }
-};
+        }
 
-const options = document.querySelectorAll(".option");
-options.forEach(option => option.addEventListener('click', playRound));
+        if (!winner) {
+            // Check columns
+            for (let col = 0; col < boardColumns; col++) {
+                let marked = board[0][col];     // either X or O
+                if (marked) {
+                    for (let row = 0; row < boardRows; row++) {
+                        if (board[row][col] == marked) {
+                            winner = true;
+                        }                    
+                        else {
+                            winner = false;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        if (!winner) {
+            // Check diagonals: Top left to bottom right
+            let marked = board[0][0];       // either X or O
+            if (marked) {
+                for (let grid = 1; grid < boardColumns; grid++) {
+                    if (board[grid][grid] == marked) {
+                        winner = true;
+                    }
+                    else {
+                        winner = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!winner) {
+            // Check diagonals: Top right to bottom left
+            marked = board[0][2];       // either X or O
+            if (marked) {
+                for (let row = 0; row < boardRows; row++) {
+                    if (board[row][boardColumns - 1 - row] == marked) {
+                        winner = true;
+                    }
+                    else {
+                        winner = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (winner) {
+            console.log(winner);
+        }
+    };
+
+    return { addX, addO, board /*test*/};
+})();
+
+
+const test = (() => {
+    console.log("---TEST---");
+    board.addO(0,2);
+    board.addO(1,2);
+    board.addO(2,0);
+
+})();
