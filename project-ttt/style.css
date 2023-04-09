@@ -1,3 +1,18 @@
 body {
     background: #ccc;
 }
+
+.board {
+    display: grid;
+}
+
+.grid-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.grid-cell {
+    border: 1px solid red;
+    padding: 2em;
+}
